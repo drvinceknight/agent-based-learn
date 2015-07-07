@@ -34,3 +34,20 @@ class EnvironemntTesting(unittest.TestCase):
                         set([pair[1]]) < set(env.col_agents) for pair in pairs]))
         self.assertEqual(set([pair[0] for pair in pairs]), set(env.row_agents))
         self.assertEqual(set([pair[1] for pair in pairs]), set(env.col_agents))
+
+    def test_interact(self):
+        bimatrix =[[[1, 2], [4, 5]], [[5, 1], [6, 1]], [[5, 1], [8, 2]]]
+        env = ablearn.environments.BiMatrixRandomEnv(number_of_agents=20,
+                bimatrix=bimatrix)
+
+        for ra, ca in zip(env.row_agents, env.col_agents):
+            ra.strategy = random.choice(env.row_strategies)
+            ca.strategy = random.choice(env.col_strategies)
+            self.assertEqual(ra.utility, 0)
+            self.assertEqual(ca.utility, 0)
+
+        env.interact()
+
+        for ra, ca in zip(env.row_agents, env.col_agents):
+            self.assertEqual(ra.utility, bimatrix[ra.strategy][ca.strategy][0])
+            self.assertEqual(ca.utility, bimatrix[ra.strategy][ca.strategy][1])

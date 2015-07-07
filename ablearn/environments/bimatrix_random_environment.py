@@ -20,6 +20,13 @@ class BiMatrixRandomEnv():
         self.row_strategies = range(self.number_of_row_strategies)
         self.col_strategies = range(self.number_of_col_strategies)
 
+    def interact(self):
+        pairs = self.randomly_pair_agents()
+        for ra, ca in pairs:
+            utility = self.strategies_to_utilities([ra.strategy, ca.strategy])
+            ra.increment_utility(utility[0])
+            ca.increment_utility(utility[1])
+
     def strategies_to_utilities(self, strategy):
         return self.bimatrix[strategy[0]][strategy[1]]
 
