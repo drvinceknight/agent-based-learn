@@ -2,7 +2,7 @@ class Agent:
     """
     A generic class for agents that will be used by the library
     """
-    def __init__(self, strategies, label=False):
+    def __init__(self, strategies=False, label=False):
         self.strategies = strategies
         self.utility = 0
         self.label = label
