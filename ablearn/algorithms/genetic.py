@@ -1,5 +1,7 @@
 import random
-	
+import ablearn
+from ablearn.environments.randomenv import * 	
+
 class Genetic:
     """
     For now only values this values have been placed.
@@ -12,5 +14,5 @@ class Genetic:
 		self.generations = generations
 		self.rounds_per_generation = rounds_per_generation
 		self.death_rate = death_rate
-		self.number_of_deaths_per_generation = int(number_of_agents * death_rate)
+		self.number_of_deaths_per_generation = int(death_rate * 10) #ablearn.environments.randomenv.randomenv.__init__.number_of_agents)
 		self.mutation_rate = mutation_rate

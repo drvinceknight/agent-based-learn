@@ -4,8 +4,29 @@ from ablearn.rules import *
 from ablearn.population import *
 import ablearn
 
-b = [[[4, 4],[0, 5]], [[5, 0],[2, 2]]]
+random.seed(0)
 
+b = [[[4, 4],[0, 5]], [[5, 0],[2, 2]]]
+"""
+COMMENTED OUT BECAUSE TO MAKE TESTS WORK.
+
+
+
+def eliminate_low_utility_agent(agents):
+	#Sort row agents for eliminating.
+	agents.sort(key=lambda x: x.utility)
+	# Eliminate row agent with lowest utility.
+	del agents[0]
+			
+def reproduce_high_utility_agent(agents, mutation_rate, agent_number_of_strategies):
+	#Sort row agents for reproducing.
+	agents.sort(key=lambda x: x.utility)
+	# Reproduce row agent with highest utility.
+	agents.append(copy.deepcopy(agents[-1]))
+	if random.random() < mutation_rate:
+		agents[-1].strategies = random.choice([ s for s in self.agent_number_of_strategies if s != agents[-1].strategies])
+"""			
+		
 class randomenv:
 	
 	"""
@@ -55,7 +76,7 @@ class randomenv:
 	"""
 
 	def interaction(self):
-		random.seed(0)
+	
 		for i in range(self.number_of_agents):
 			self.row_agents[i].utility += self.row_strategies[self.row_agents[i].strategies][self.col_agents[i].strategies]
 
@@ -65,32 +86,50 @@ class randomenv:
 	REGULATING THE POPULATION
 	"""
 
-
-	"""
-
 	def regulating_agent_population(self):
+		"""	
+		
+		"""
 	
-	This last section is not completed yet, I want to ask if there is a possible way of finding the position of an instance in a list by looking for a specific value in attribute, something like: row_agents.utility.index(min(row_agents.utility)). And with this to create a specific function to delete or if its max value, to reproduce the agent.
-	
-	For now I only have the function below for eliminating agents, but it eliminates all agents with a  certain value, and I fear that there might be more than one agent with a minimum value at some point.
-
-	The test for this last section is also not written yet.
-	"""
-	"""
 
 		d = 0
-		while d < genetic.Genetic.number_of_deaths_per_generation:
+		while d < 10: #algorithms.genetic.Genetic.number_of_deaths_per_generation:  COMMENTED OUT BECAUSE REFERENCE DID NOT WORK.
+			"""
+		COMMENTED OUT BECAUSE REFERENCE DID NOT WORK.
+		while d < algorithms.genetic.Genetic.number_of_deaths_per_generation: 
 			# Eliminate row agent with lowest utility.
-			self.row_agents = [row_agents[k] for row_agents[k] in row_agents if row_agents[k].utility != min(([e.utility for e in self.row_agents])
-			
+			eliminate_low_utility_agent(self.row_agents)
 			# Reproduce row agent with highest utility.
+			reproduce_high_utility_agent(self.row_agents, algorithms.genetic.Genetic.mutation_rate, self.row_number_of_strategies)
 
+			# Eliminate column agent with lowest utility.
+			eliminate_low_utility_agent(self.col_agents)
+			# Reproduce column agent with highest utility.
+			reproduce_high_utility_agent(self.col_agents, algorithms.genetic.Genetic.mutation_rate, self.col_number_of_strategies)
 
+			"""
+			#Sort row agents for eliminating.
+			self.row_agents.sort(key=lambda x: x.utility)
 			# Eliminate row agent with lowest utility.
-			self.col_agents = [col_agents[k] for col_agents[k] in col_agents if col_agents[k].utility != min(([e.utility for e in self.col_agents])
-
-
+			del self.row_agents[0]
+	
+			#Sort row agents for reproducing.
+			self.row_agents.sort(key=lambda x: x.utility)
 			# Reproduce row agent with highest utility.
+			self.row_agents.append(copy.deepcopy(self.row_agents[-1]))
+			if random.random() < 0.4: #algorithms.genetic.Genetic.mutation_rate:
+				self.row_agents[-1].strategies = random.choice([ s for s in self.row_number_of_strategies if s != self.row_agents[-1].strategies])
 
-	"""
+			#Sort column agents for eliminating.
+			self.col_agents.sort(key=lambda x: x.utility)
+			# Eliminate column agent with lowest utility.
+			del self.col_agents[0]
+							
+			#Sort column agents for reproducing.
+			self.col_agents.sort(key=lambda x: x.utility)
+			# Reproduce column agent with highest utility.
+			self.col_agents.append(copy.deepcopy(self.col_agents[-1]))
+			if random.random() < 0.4: #algorithms.genetic.Genetic.mutation_rate:
+				self.col_agents[-1].strategies = random.choice([ s for s in self.col_number_of_strategies if s != self.col_agents[-1].strategies])
 
+			d += 1
