@@ -9,5 +9,3 @@ class Agent:
 
     def increment_utility(self, amount=1):
         self.utility += amount
-
-		
