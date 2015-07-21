@@ -42,7 +42,7 @@ class GATesting(unittest.TestCase):  #This class is to test the Genetic Algotihm
 			ra.strategy = random.choice(env.row_strategies)
 			ca.strategy = random.choice(env.col_strategies)
 
-		#gen.assign_strategies()
+		gen.assign_strategies()
 
 		self.assertEqual(len(str(env.row_agents[0].strategy)), 1)
 		self.assertEqual(len(str(env.col_agents[0].strategy)), 1)
@@ -62,7 +62,7 @@ class GATesting(unittest.TestCase):  #This class is to test the Genetic Algotihm
 		env = ablearn.environments.BiMatrixRandomEnv(number_of_agents=20,
                 bimatrix=bimatrix)
 
-		#gen.kill_agents()
+		gen.kill_agents()
 
 		self.assertEqual(env.row_agents[0].utility, 0)
 		self.assertEqual(env.col_agents[0].utility, 0)
@@ -83,7 +83,8 @@ class GATesting(unittest.TestCase):  #This class is to test the Genetic Algotihm
 		env = ablearn.environments.BiMatrixRandomEnv(number_of_agents=20,
                 bimatrix=bimatrix)
 
-		#gen.reproduce_agents()
+		gen.reproduce_agents()
 
 		self.assertEqual(env.row_agents[-1].utility, 0)
 		self.assertEqual(env.col_agents[-1].utility, 0)
+		

@@ -1,8 +1,8 @@
 import random
 import ablearn
-from ablearn.environments import BiMatrixRandomEnv as env
+from ablearn.environments import *
 
-class Genetic:
+class Genetic():
 	"""
     For now only values this values have been placed.
 	"""
@@ -15,27 +15,35 @@ class Genetic:
 		self.death_rate = death_rate
 		self.number_of_deaths_per_generation = int(death_rate * 10) #ablearn.environments.BiMatrixRandomEnv.number_of_agents)
 		self.mutation_rate = mutation_rate
+		global env_ob
+		env_ob = BiMatrixRandomEnv(number_of_agents=20, bimatrix=[[[0,1], [2,3]], [[4,5], [5,6]]])
 
 	def assign_strategies(self):
-	 	for r in env.row_agents:r.strategy=random.choice(env.row_strategies)
-		for c in env.col_agents:c.strategy=random.choice(env.col_strategies)
+		""" Assigning random strategies to agents"""
+	 	for r in env_ob.row_agents:r.strategy=random.choice(env_ob.row_strategies)
+		for c in env_ob.col_agents:c.strategy=random.choice(env_ob.col_strategies)
 
 	def kill_agents(self):
 		""" Eliminating row and column agents with lowest utilities
 		"""
 		d = 0
 		while d < self.number_of_deaths_per_generation:
-			env.row_agents.sort(key=lambda x: x.utility)
-			del env.row_agents[0]
-			env.col_agents.sort(key=lambda x: x.utility)
-			del env.col_agents[0]
+			env_ob.row_agents.sort(key=lambda x: x.utility)
+			del env_ob.row_agents[0]
+			env_ob.col_agents.sort(key=lambda x: x.utility)
+			del env_ob.col_agents[0]
 			d += 1
 
 	def reproduce_agents(self):
 		""" Reproducing row and column agents with highest utilities """
-		while len(env.row_agents) < env.number_of_row_agents:
-			env.row_agents.sort(key=lambda x: x.utility)
-			env.row_agents.append(copy.deepcopy(env.row_agents[-1]))
-		while len(env.col_agents) < env.number_of_col_agents:
-			env.col_agents.sort(key=lambda x: x.utility)
-			env.col_agents.append(copy.deepcopy(env.col_agents[-1]))
+		while len(env_ob.row_agents) < env_ob.number_of_row_agents:
+			env_ob.row_agents.sort(key=lambda x: x.utility)
+			env_ob.row_agents.append(copy.deepcopy(env_ob.row_agents[-1]))  # random.choice
+			if random.random() < mutation_rate:
+				 row_agents[-1].strategy = random.choice([s for s in r_s if s != row_agents[-1].strategy])
+
+		while len(env_ob.col_agents) < env_ob.number_of_col_agents:
+			env_ob.col_agents.sort(key=lambda x: x.utility)
+			env_ob.col_agents.append(copy.deepcopy(env_ob.col_agents[-1]))  #random.choice
+			if random.random() < mutation_rate:
+				col_agents[-1].strategy = random.choice([s for s in r_s if s != col_agents[-1].strategy])
