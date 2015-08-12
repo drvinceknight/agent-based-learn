@@ -41,13 +41,13 @@ class EnvironemntTesting(unittest.TestCase):
                 bimatrix=bimatrix)
 
         for ra, ca in zip(env.row_agents, env.col_agents):
-            ra.strategy = random.choice(env.row_strategies)
-            ca.strategy = random.choice(env.col_strategies)
+            ra.strategies = random.choice(env.row_strategies)
+            ca.strategies = random.choice(env.col_strategies)
             self.assertEqual(ra.utility, 0)
             self.assertEqual(ca.utility, 0)
 
         env.interact()
 
         for ra, ca in zip(env.row_agents, env.col_agents):
-            self.assertEqual(ra.utility, bimatrix[ra.strategy][ca.strategy][0])
-            self.assertEqual(ca.utility, bimatrix[ra.strategy][ca.strategy][1])
+            self.assertEqual(ra.utility, bimatrix[ra.strategies][ca.strategies][0])
+            self.assertEqual(ca.utility, bimatrix[ra.strategies][ca.strategies][1])

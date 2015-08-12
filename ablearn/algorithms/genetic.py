@@ -1,58 +1,47 @@
 import random
 import ablearn
-from ablearn.environments import *
+import copy
+
+
 
 class Genetic():
 	"""
     For now only values this values have been placed.
 	"""
-	def __init__(self, generations, rounds_per_generation, death_rate, number_of_deaths_per_generation, mutation_rate, exploitation_rate, initial_strategy_distribution=False):
-		""""
-		INITIALIZATION
-		"""
+	def __init__(self, generations, rounds_per_generation, death_rate,
+				mutation_rate, exploitation_rate, initial_strategy_distribution=False):
+
+		""""		INITIALIZATION		"""
+		#global env_ob
+		#env_ob = ablearn.environments.bimatrix_random_environment.BiMatrixRandomEnv(number_of_agents=10, bimatrix=[[[0,1], [2,3]], [[4,5], [5,6]]])
+
 		self.generations = generations
 		self.rounds_per_generation = rounds_per_generation
 		self.death_rate = death_rate
-		self.number_of_deaths_per_generation = int(death_rate * 10) #ablearn.environments.BiMatrixRandomEnv.number_of_agents)
 		self.mutation_rate = mutation_rate
 		self.exploitation_rate = exploitation_rate
-		global env_ob
-		env_ob = BiMatrixRandomEnv(number_of_agents=20, bimatrix=[[[0,1], [2,3]], [[4,5], [5,6]]])
-		choice = int(env_ob.number_of_agents / 2 * (1 - self.exploitation_rate))
 
-	def assign_strategies(self):
+	def assign_strategies(self, agents, agents_strategies):
 		""" Assigning random strategies to agents"""
-		if not initial_strategy_distribution:
-			""" Assigning random strategies with no initial distribution"""
-		 	for r in env_ob.row_agents:r.strategy=random.choice(env_ob.row_strategies)
-			for c in env_ob.col_agents:c.strategy=random.choice(env_ob.col_strategies)
-		else:
-			""" Assigning random strategies with initial distribution """
-			for r in env_ob.row_agents:r.strategy=random.choice(strategy for strategy in initial_strategy_distribution[0] for count in range(initial_strategy_distribution[0][strategy]env_ob.row_strategies)
-			for c in env_ob.col_agents:c.strategy=random.choice(env_ob.col_strategies)
+		for a in agents:
+			a.strategies=random.choice(agents_strategies)
+			#print a.strategies
 
-
-	def kill_agents(self):
-		""" Eliminating row and column agents with lowest utilities
-		"""
+	def kill_agents(self, agents, number_of_agents, number_of_x_agents, agents_strategies):
+		self.number_of_deaths_per_generation = int(self.death_rate * (number_of_x_agents))
+		""" Eliminating row and column agents with lowest utilities	"""
 		d = 0
 		while d < self.number_of_deaths_per_generation:
-			env_ob.row_agents.sort(key=lambda x: x.utility)
-			del env_ob.row_agents[0]
-			env_ob.col_agents.sort(key=lambda x: x.utility)
-			del env_ob.col_agents[0]
+			agents.sort(key=lambda x: x.utility)
+			del agents[0]
+			#self.reproduce_agents(agents, number_of_agents, number_of_x_agents, agents_strategies)
 			d += 1
 
-	def reproduce_agents(self):
+	def reproduce_agents(self, agents, number_of_agents, number_of_x_agents, agents_strategies):
+		choice = int((number_of_agents - 2) / 2 * (self.exploitation_rate - 1)) - 1
 		""" Reproducing row and column agents with highest utilities """
-		while len(env_ob.row_agents) < env_ob.number_of_row_agents:
-			env_ob.row_agents.sort(key=lambda x: x.utility)
-			env_ob.row_agents.append(copy.deepcopy(random.choice(env_ob.row_agents[choice:])))  # test random.choice
-			if random.random() < mutation_rate: # test mutation rate
-				 row_agents[-1].strategy = random.choice([s for s in r_s if s != row_agents[-1].strategy])
-
-		while len(env_ob.col_agents) < env_ob.number_of_col_agents:
-			env_ob.col_agents.sort(key=lambda x: x.utility)
-			env_ob.col_agents.append(copy.deepcopy(random.choice(env_ob.col_agents[choice:])))  # test random.choice
-			if random.random() < mutation_rate: # test mutation rate
-				col_agents[-1].strategy = random.choice([s for s in r_s if s != col_agents[-1].strategy])
+		while len(agents) < number_of_x_agents:
+			agents.sort(key=lambda x: x.utility)
+			agents.append(copy.deepcopy(random.choice(agents[choice:])))  # test random.choice
+			if random.random() < self.mutation_rate: # test mutation rate
+				 agents[-1].strategies = random.choice([s for s in agents_strategies if s != agents[-1].strategies])

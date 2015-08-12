@@ -3,6 +3,7 @@ import random
 
 class BiMatrixRandomEnv():
 	def __init__(self, number_of_agents, bimatrix):
+
 		self.number_of_agents = number_of_agents
 		self.number_of_row_agents = number_of_agents / 2
 		self.number_of_col_agents = number_of_agents / 2
@@ -23,7 +24,7 @@ class BiMatrixRandomEnv():
 	def interact(self):
 		pairs = self.randomly_pair_agents()
 		for ra, ca in pairs:
-			utility = self.strategies_to_utilities([ra.strategy, ca.strategy])
+			utility = self.strategies_to_utilities([ra.strategies, ca.strategies])
 			ra.increment_utility(utility[0])
 			ca.increment_utility(utility[1])
 
