@@ -1,20 +1,25 @@
-.. ablearn documentation master file, created by
-   sphinx-quickstart on Mon Aug 31 10:12:35 2015.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to ablearn's documentation!
+Documentation for Ablearn Package.
 ===================================
+This library aims to develop algorithms for agent based models.
+
+
+What is Ablearn?
+----------------
+
+Ablearn is a  for solving normal form games, for game theory. Which
+allows anyone interested to contribute with ideas and other algorithms that can
+solve normal form games.
 
 Contents:
 
 .. toctree::
-   :maxdepth: 2
-   Libary
-   Modules
+   :maxdepth: 3
+
+   howtouse
+   help
+   license
 
 
-This library aims to develop algorithms for agent based models.
 
 
 Indices and tables

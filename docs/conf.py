@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
-# ablearn documentation build configuration file, created by
-# sphinx-quickstart on Mon Aug 31 10:12:35 2015.
+# Ablearn documentation build configuration file, created by
+# sphinx-quickstart on Mon Sep 07 03:09:14 2015.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -30,11 +30,11 @@ import shlex
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.mathjax',
+    'sphinx.ext.autodoc',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ['ntemplates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -48,9 +48,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'ablearn'
-copyright = u'2015, Cesar Isparza'
-author = u'Cesar Isparza'
+project = u'Ablearn'
+copyright = u'2015, Cesar Esparza & Vincent Knight'
+author = u'Cesar Esparza & Vincent Knight'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -76,7 +76,7 @@ language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build']
+exclude_patterns = []
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -139,7 +139,7 @@ html_theme = 'alabaster'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['nstatic']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -202,7 +202,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'ablearndoc'
+htmlhelp_basename = 'Ablearndoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -224,8 +224,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'ablearn.tex', u'ablearn Documentation',
-   u'Cesar Isparza', 'manual'),
+  (master_doc, 'Ablearn.tex', u'Ablearn Documentation',
+   u'Cesar Esparza \\& Vincent Knight', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -254,7 +254,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'ablearn', u'ablearn Documentation',
+    (master_doc, 'ablearn', u'Ablearn Documentation',
      [author], 1)
 ]
 
@@ -268,8 +268,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  (master_doc, 'ablearn', u'ablearn Documentation',
-   author, 'ablearn', 'One line description of project.',
+  (master_doc, 'Ablearn', u'Ablearn Documentation',
+   author, 'Ablearn', 'One line description of project.',
    'Miscellaneous'),
 ]
 
