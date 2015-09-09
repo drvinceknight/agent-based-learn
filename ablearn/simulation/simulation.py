@@ -184,7 +184,7 @@ class Simulation:
                     if ra.strategies == rs:
                         frequency_per_strategy_for_sum[rs] += 1
             for cs in col_strategies:
-                for ca in col_agents:sss
+                for ca in col_agents:
                     if ca.strategies == cs:
                         frequency_per_strategy_for_sum[cs] += 1
         else:
